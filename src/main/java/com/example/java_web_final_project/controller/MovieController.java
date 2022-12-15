@@ -29,8 +29,6 @@ public class MovieController {
         this.assembler = assembler;
     }
 
-//    @GetMapping()
-//    public String sayHello() {return "Test";}
     @GetMapping(path="/movies")
     CollectionModel<EntityModel<Movie>> all() {
         List<EntityModel<Movie>> movies = movieRepository.findAll().stream()
@@ -58,11 +56,11 @@ public class MovieController {
     }
 
     @PutMapping("/movies/{id}")
-    ResponseEntity<?> replaceProduct(@RequestBody MovieDto movieDto, @PathVariable Integer id) {
+    ResponseEntity<?> replaceMovie(@RequestBody MovieDto movieDto, @PathVariable Integer id) {
 
         Movie updatedMovie = movieRepository.findById(id) //
                 .map(movie -> {
-                    movie.setName(movieDto.getName());
+                    movie.setName( movieDto.getName() );
                     movie.setYear( movieDto.getYear() );
                     return movieRepository.save(movie);
                 }) //
